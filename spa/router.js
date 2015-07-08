@@ -8,12 +8,12 @@ import Layout from './layout';
 import MessagePage from './pages/message';
 import PublicPage from './pages/public';
 import RegisterUserPage from './pages/register';
-import BeersPage from './pages/beers';
-import CreateBeerPage from './pages/create-beer';
-import BeerDetailPage from './pages/detail-beer';
-import BeerEditPage from './pages/edit-beer';
-import BeerDeletePage from './pages/delete-beer';
-import Beer from './models/beer'
+import LayersPage from './pages/layers';
+import CreateLayerPage from './pages/create-layer';
+import LayerDetailPage from './pages/detail-layer';
+import LayerEditPage from './pages/edit-layer';
+import LayerDeletePage from './pages/delete-layer';
+import Layer from './models/layer'
 
 export default Router.extend({
 
@@ -31,11 +31,11 @@ export default Router.extend({
   routes: {
     '': 'public',
     'register': 'registerUser',
-    'beers/create': 'createBeer',
-    'beers/edit/:id': 'editBeer',
-    'beers/delete/:id': 'deleteBeer',
-    'beers/:id': 'detailsBeer',
-    'beers': 'listBeers',
+    'layers/create': 'createLayer',
+    'layers/edit/:id': 'editLayer',
+    'layers/delete/:id': 'deleteLayer',
+    'layers/:id': 'detailsLayer',
+    'layers': 'listLayers',
     'logout': 'logout',
     '*fourohfour': 'fourOhFour'
   },
@@ -44,7 +44,7 @@ export default Router.extend({
     if (!app.me.authenticated) {
       this.renderPage(<PublicPage me={app.me}/>, { layout: false });
     } else {
-      this.redirectTo('/beers');
+      this.redirectTo('/layers');
     }
   },
 
@@ -52,80 +52,80 @@ export default Router.extend({
     if (!app.me.authenticated) {
       this.renderPage(<RegisterUserPage user={app.me}/>, { layout: false });
     } else {
-      this.redirectTo('/beers');
+      this.redirectTo('/layers');
     }
   },
 
-  listBeers () {
+  listLayers () {
     if (!app.me.authenticated) {
       this.redirectTo('');
     } else {
-      app.me.beers.fetch();
-      this.renderPage(<BeersPage beers={app.me.beers} />);
+      app.me.layers.fetch();
+      this.renderPage(<LayersPage layers={app.me.layers} />);
     }
   },
 
-  createBeer () {
+  createLayer () {
     if (!app.me.authenticated) {
       this.redirectTo('');
     } else {
-      const beer = new Beer();
-      this.renderPage(<CreateBeerPage beer={beer} />);
+      const layer = new Layer();
+      this.renderPage(<CreateLayerPage layer={layer} />);
     }
   },
 
-  editBeer (id) {
+  editLayer (id) {
     const _this = this;
-    let beer = app.me.beers.get(id);
-    if (!beer) {
-      beer = new Beer({ _id: id });
-      beer.fetch({
+    let layer = app.me.layers.get(id);
+    if (!layer) {
+      layer = new Layer({ _id: id });
+      layer.fetch({
         error () {
-          _this.renderPage(<MessagePage title='Beer not found' />);
+          _this.renderPage(<MessagePage title='Layer not found' />);
         },
         success () {
-          _this.renderPage(<BeerEditPage beer={beer} />);
+          _this.renderPage(<LayerEditPage layer={layer} />);
         }
       });
     } else {
-      this.renderPage(<BeerEditPage beer={beer} />);
+      this.renderPage(<LayerEditPage layer={layer} />);
     }
 
   },
 
-  deleteBeer (id) {
+  deleteLayer (id) {
     const _this = this;
-    let beer = app.me.beers.get(id);
-    if (!beer) {
-      beer = new Beer({ _id: id });
-      beer.fetch({
+    let layer = app.me.layers.get(id);
+    if (!layer) {
+      layer = new Layer({ _id: id });
+      layer.fetch({
         error () {
-          _this.renderPage(<MessagePage title='Beer not found' />);
+          _this.renderPage(<MessagePage title='Layer not found' />);
         },
         success () {
-          _this.renderPage(<BeerDeletePage beer={beer} />);
+          _this.renderPage(<LayerDeletePage layer={layer} />);
         }
       });
     } else {
-      this.renderPage(<BeerDeletePage beer={beer} />);
+      this.renderPage(<LayerDeletePage layer={layer} />);
     }
   },
 
-  detailsBeer (id) {
+  detailsLayer (id) {
     const _this = this;
-    let beer = app.me.beers.get(id);
-    if (!beer) {
-      beer = new Beer({ _id: id });
-      beer.fetch({
+    let layer = app.me.layers.get(id);
+    if (!layer) {
+      layer = new Layer({ _id: id });
+      layer.fetch({
         error () {
-          _this.renderPage(<MessagePage title='Beer not found' />);
+          _this.renderPage(<MessagePage title='Layer not found' />);
         },
         success () {
-          _this.renderPage(<BeerDetailPage beer={beer} />);
+          _this.renderPage(<LayerDetailPage layer={layer} />);
         }
       });
     } else {
-      this.renderPage(<BeerDetailPage beer={beer} />);
+      this.renderPage(<LayerDetailPage layer={layer} />);
     }
   },
 

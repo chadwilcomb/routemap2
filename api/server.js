@@ -7,7 +7,8 @@ var cors = require('cors');
 
 // Load controllers
 var authController = require('./controllers/auth');
-var beerController = require('./controllers/beer');
+var projectController = require('./controllers/project');
+var layerController = require('./controllers/layer');
 var userController = require('./controllers/user');
 
 var port = process.env.PORT || 8080;
@@ -35,16 +36,29 @@ app.use(passport.initialize());
 // Create our Express router
 var router = express.Router();
 
-// Create endpoint handlers for /beers
-router.route('/beers')
-  .post(authController.isAuthenticated, beerController.postBeer)
-  .get(authController.isAuthenticated, beerController.getBeers);
+// Create endpoint handlers for /layers
+router.route('/layers')
+  .post(authController.isAuthenticated, layerController.postLayer)
+  .get(authController.isAuthenticated, layerController.getLayers);
 
-// Create endpoint handlers for /beers/:beer_id
-router.route('/beers/:beer_id')
-  .get(authController.isAuthenticated, beerController.getBeer)
-  .put(authController.isAuthenticated, beerController.putBeer)
-  .delete(authController.isAuthenticated, beerController.deleteBeer);
+// Create endpoint handlers for /layers/:layer_id
+router.route('/layers/:layer_id')
+  .get(authController.isAuthenticated, layerController.getLayer)
+  .put(authController.isAuthenticated, layerController.putLayer)
+  .delete(authController.isAuthenticated, layerController.deleteLayer);
+
+// Create endpoint handlers for /projects
+router.route('/projects')
+  .post(authController.isAuthenticated, projectController.postProject)
+  .get(authController.isAuthenticated, projectController.getProjects);
+
+// Create endpoint handlers for /projects/:projects_id
+router.route('/projects/:project_id')
+  .get(authController.isAuthenticated, projectController.getProject)
+  .put(authController.isAuthenticated, projectController.putProject)
+  .delete(authController.isAuthenticated, projectController.deleteProject);
+
+
 
 // Create endpoint handlers for /users
 router.route('/users')

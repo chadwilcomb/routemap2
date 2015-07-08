@@ -8,13 +8,13 @@
     "start-api": "nodemon api/server",
     "prebuild": "rm -rf public && mkdir public",
     "build": "NODE_ENV=production webpack",
-    "surge": "surge -p public -d ramen-stack.surge.sh",
+    "surge": "surge -p public -d routemap2.surge.sh",
     "deploy-client": "npm run build && npm run surge",
     "deploy-api": "git push origin master"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chadwilcomb/ramen-stack.git"
+    "url": "git+https://github.com/chadwilcomb/routemap2.git"
   },
   "keywords": [
     "React",
@@ -28,9 +28,9 @@
   "author": "Chad Wilcomb",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chadwilcomb/ramen-stack/issues"
+    "url": "https://github.com/chadwilcomb/routemap2/issues"
   },
-  "homepage": "https://github.com/chadwilcomb/ramen-stack#readme",
+  "homepage": "https://github.com/chadwilcomb/routemap2#readme",
   "dependencies": {
     "ampersand-app": "^1.0.4",
     "ampersand-model": "^5.0.3",
@@ -46,6 +46,7 @@
     "json-loader": "^0.5.1",
     "local-links": "^1.4.0",
     "mongoose": "^4.0.6",
+    "mongoose-geojson-schema": "0.0.2",
     "node-libs-browser": "^0.5.0",
     "node-uuid": "^1.4.3",
     "nodemon": "^1.3.7",

@@ -5,7 +5,7 @@ import authMixin from '../helpers/api-auth-mixin';
 export default Model.extend(authMixin, {
 
   url () {
-    let url = app.apiUrl + '/api/beers/';
+    let url = app.apiUrl + '/api/layers/';
     if (this.isNew()) {
       return url;
     } else {
@@ -18,29 +18,29 @@ export default Model.extend(authMixin, {
 
   props: {
     _id: 'string',
-    brewery: 'string',
-    name: 'string',
-    type: 'string',
-    quantity: 'number'
+    title: 'string',
+    description: 'string',
+    features: 'object',
+    created: 'number'
   },
 
   derived: {
     details_url: {
       deps: ['id'],
       fn () {
-        return 'beers/' + this.getId();
+        return 'layers/' + this.getId();
       }
     },
     update_url: {
       deps: ['id'],
       fn () {
-        return 'beers/edit/' + this.getId();
+        return 'layers/edit/' + this.getId();
       }
     },
     delete_url: {
       deps: ['id'],
       fn () {
-        return 'beers/delete/' + this.getId();
+        return 'layers/delete/' + this.getId();
       }
     }
   },

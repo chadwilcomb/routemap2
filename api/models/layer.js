@@ -1,0 +1,24 @@
+// Load required packages
+var mongoose = require('mongoose');
+var GeoJSON = require('mongoose-geojson-schema');
+
+var LayerSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    index: true,
+    required: "Title is required",
+  },
+  description: String,
+  features: GeoJSON.FeatureCollection,
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  creator: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
+});
+
+// Export the Mongoose model
+module.exports = mongoose.model('Layer', LayerSchema);
