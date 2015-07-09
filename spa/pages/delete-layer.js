@@ -25,7 +25,7 @@ export default React.createClass({
         const {layer} = this.props
 
         return (
-            <div className='container'>
+            <div>
               <h2>Are you sure you want to delete {layer.title} layer?</h2>
               <button type='button' className='button button-warn' onClick={this.onClickDelete}>Delete</button>
               <br/>

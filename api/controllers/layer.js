@@ -27,7 +27,7 @@ exports.postLayer = function(req, res) {
 exports.getLayers = function(req, res) {
 
   // Use the Layer model to find all layers
-  Layer.find({ creator: req.user._id }, function(err, layers) {
+  Layer.find({ creator: req.user._id },'_id title description created creator', function(err, layers) {
     if (err)
       res.send(err);
 

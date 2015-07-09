@@ -84,7 +84,7 @@ export default React.createClass({
       const {title,description,features,error} = this.state;
 
       return (
-        <div className='container'>
+        <div>
           <h1>Add a layer</h1>
           <form name='createLayerForm' onSubmit={this.onSubmitForm}>
             <fieldset>

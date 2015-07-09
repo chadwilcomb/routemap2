@@ -114,8 +114,8 @@ export default Router.extend({
   detailsLayer (id) {
     const _this = this;
     let layer = app.me.layers.get(id);
-    if (!layer) {
-      layer = new Layer({ _id: id });
+    if (!layer || !layer.features) {
+      layer = layer || new Layer({ _id: id });
       layer.fetch({
         error () {
           _this.renderPage(<MessagePage title='Layer not found' />);

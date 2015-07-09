@@ -32,7 +32,7 @@ export default React.createClass({
         const {layer} = this.props
 
         return (
-          <div className='container'>
+          <div>
             <h1>Edit Layer</h1>
             <form name='createLayerForm' onSubmit={this.onSubmitForm}>
               <fieldset>

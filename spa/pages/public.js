@@ -26,7 +26,7 @@ export default React.createClass({
           _this.setState({ error: 'Your username and/or password are incorrect' });
         },
         success: function () {
-          app.router.redirectTo('/beers');
+          app.router.redirectTo('/layers');
         }
       });
     },

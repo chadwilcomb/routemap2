@@ -55,7 +55,7 @@ export default React.createClass({
       const {username,password,confirm,error} = this.state;
 
         return (
-          <div className='container'>
+          <div>
             <h1>Register account for RouteMap</h1>
             <form name='registerForm' onSubmit={this.onSubmitForm}>
               <fieldset>
