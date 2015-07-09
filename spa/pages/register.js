@@ -56,7 +56,7 @@ export default React.createClass({
 
         return (
           <div className='container'>
-            <h1>Register for <a href='https://github.com/chadwilcomb/ramen-stack' target='_blank'>RAMEN</a> API<span className='icon ramen'></span></h1>
+            <h1>Register account for RouteMap</h1>
             <form name='registerForm' onSubmit={this.onSubmitForm}>
               <fieldset>
               <legend>Your info</legend>

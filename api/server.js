@@ -14,7 +14,7 @@ var userController = require('./controllers/user');
 var port = process.env.PORT || 8080;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/routemap';
 
-// Connect to the ramen-stack MongoDB
+// Connect to the MongoDB  
 mongoose.connect(mongoUri);
 
 console.log('Mongoose connected to ' + mongoUri);

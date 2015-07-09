@@ -72,7 +72,7 @@ exports.seedAdmin = function (req, res) {
     if (!user) {
       var user = new User({
         username: 'admin',
-        password: 'ramen'
+        password: 'routemap'
       });
 
       user.save(function(err) {
