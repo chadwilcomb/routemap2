@@ -57,11 +57,19 @@ export default Router.extend({
   },
 
   listLayers () {
+    const _this = this;
     if (!app.me.authenticated) {
       this.redirectTo('');
     } else {
-      app.me.layers.fetch();
-      this.renderPage(<LayersPage layers={app.me.layers} />);
+      this.renderPage(<MessagePage title='Fetching layers...' />);
+      app.me.layers.fetch({
+        error () {
+          _this.renderPage(<MessagePage title='Error fetching layers.' />);
+        },
+        success () {
+          _this.renderPage(<LayersPage layers={app.me.layers} />);
+        }
+      });
     }
   },
 
@@ -118,7 +126,8 @@ export default Router.extend({
       layer = layer || new Layer({ _id: id });
       this.renderPage(<MessagePage title='Fetching layer details...' />);
       layer.fetch({
-        error () {
+        error (model, response) {
+          console.log(response);
           _this.renderPage(<MessagePage title='Layer not found' />);
         },
         success () {
