@@ -11,6 +11,7 @@ export default React.createClass({
     onSubmitForm (event) {
         event.preventDefault();
         const {layer} = this.props;
+        app.router.renderPage(<MessagePage title='Saving layer details...' />);
         layer.save(this.state, {
           success: function () {
             app.router.redirectTo('/layers');

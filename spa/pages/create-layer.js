@@ -21,6 +21,7 @@ export default React.createClass({
               error: 'Invalid GeoJSON: ' + errMsg
             });
           } else {
+            app.router.renderPage(<MessagePage title='Saving layer details...' />);
             layer.save(_this.state, {
               success: function () {
                 app.router.redirectTo('/layers');
