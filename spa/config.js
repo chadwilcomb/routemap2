@@ -7,7 +7,7 @@ export default {
     apiUrl: 'http://localhost:8080'
   },
 
-  'ramen-stack.surge.sh': {
-    apiUrl: 'https://ramen-stack.herokuapp.com'
+  'routemap2.surge.sh': {
+    apiUrl: 'https://routemap.herokuapp.com'
   }
 }[window.location.hostname];
