@@ -1,7 +1,8 @@
 // Load required packages
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-var ProjectSchema = new mongoose.Schema({
+var ProjectSchema = new Schema({
   title: {
     type: String,
     index: true,
@@ -26,10 +27,10 @@ var ProjectSchema = new mongoose.Schema({
     type: Schema.ObjectId,
     ref: 'Account'
   }
-  features: [{
-    type: Schema.ObjectId,
-    ref: 'Feature'
-  }]
+  // features: [{
+  //   type: Schema.ObjectId,
+  //   ref: 'Feature'
+  // }]
 });
 // Export the Mongoose model
 module.exports = mongoose.model('Project', ProjectSchema);

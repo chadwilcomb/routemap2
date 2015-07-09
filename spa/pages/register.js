@@ -36,7 +36,7 @@ export default React.createClass({
         {
           success: function () {
             user.set({ isRegister: false });
-            app.router.redirectTo('/beers');
+            app.router.redirectTo('/layers');
           },
           error: function (model, response, options) {
             _this.setState({ error: response.responseText });
@@ -53,10 +53,11 @@ export default React.createClass({
 
     render () {
       const {username,password,confirm,error} = this.state;
+
         return (
           <div className='container'>
             <h1>Register for <a href='https://github.com/chadwilcomb/ramen-stack' target='_blank'>RAMEN</a> API<span className='icon ramen'></span></h1>
-            <form name='createBeerForm' onSubmit={this.onSubmitForm}>
+            <form name='registerForm' onSubmit={this.onSubmitForm}>
               <fieldset>
               <legend>Your info</legend>
                 <div className={error ? 'message message-error' : 'hidden'}>{error}</div>

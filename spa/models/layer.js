@@ -21,7 +21,7 @@ export default Model.extend(authMixin, {
     title: 'string',
     description: 'string',
     features: 'object',
-    created: 'number'
+    created: 'date'
   },
 
   derived: {

@@ -12,7 +12,7 @@ var layerController = require('./controllers/layer');
 var userController = require('./controllers/user');
 
 var port = process.env.PORT || 8080;
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/ramen-stack';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/routemap';
 
 // Connect to the ramen-stack MongoDB
 mongoose.connect(mongoUri);
@@ -26,9 +26,10 @@ app.use(cors());
 // Use the body-parser package in our application
 // configure the app to use bodyParser()
 app.use(bodyParser.urlencoded({
+    limit: '50mb',
     extended: true
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 
 // Use the passport package in our application
 app.use(passport.initialize());

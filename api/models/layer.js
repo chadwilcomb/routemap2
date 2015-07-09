@@ -1,8 +1,9 @@
 // Load required packages
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+    Schema = mongoose.Schema;
 var GeoJSON = require('mongoose-geojson-schema');
 
-var LayerSchema = new mongoose.Schema({
+var LayerSchema = new Schema({
   title: {
     type: String,
     index: true,

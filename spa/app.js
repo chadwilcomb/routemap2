@@ -1,5 +1,6 @@
 import app from 'ampersand-app';
 import icons from '../node_modules/font-awesome/css/font-awesome.css';
+import mapbox from '../node_modules/mapbox.js/theme/style.css';
 import styles from './styles/main.styl';
 import Router from './router';
 import Me from './models/me';
@@ -8,7 +9,7 @@ import config from './config';
 require("file?name=favicon.ico!./images/favicon/favicon.ico");
 
 //expose 'app' to browser console for debugging
-// window.app = app;
+window.app = app;
 
 app.extend({
   init () {

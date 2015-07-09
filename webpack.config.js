@@ -34,5 +34,8 @@ module.exports = getConfig({
             'index.html': context.defaultTemplate()
             // 'index.html': context.defaultTemplate({ head: favicon })
         };
+    },
+    node: {
+      fs: true
     }
 });

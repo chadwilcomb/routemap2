@@ -1,5 +1,6 @@
 import React from 'react';
 import ampersandMixin from 'ampersand-react-mixin';
+import MapView from '../components/map-view';
 
 export default React.createClass({
 
@@ -12,10 +13,13 @@ export default React.createClass({
     const {layer} = this.props
 
     return (
-      <div className='container'>
-        <p>Title: <strong>{layer.title}</strong></p>
-        <p>Description: <strong>{layer.description}</strong></p>
-        <p>Features: <i>{JSON.stringify(layer.features)}</i></p>
+      <div>
+        <h1 style={{ marginBottom: '0' }}>{layer.title}</h1>
+        <div>Description: <strong>{layer.description}</strong></div>
+        <div>Created: <strong>{layer.created.toLocaleString()}</strong></div>
+
+        <MapView features={layer.features}/>
+
         <a href="/layers">Return to Layers</a>
       </div>
     )

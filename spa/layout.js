@@ -17,13 +17,13 @@ export default React.createClass({
           <input id='menu-toggle' className='menu-toggle' type='checkbox'/>
           <label htmlFor='menu-toggle'>Menu</label>
           <ul className='list-unstyled list-inline cf'>
-            <li><a href='/'>RAMEN<img className="emoji" title=":ramen:" alt=":ramen:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f35c.png" height="20" width="20" align="absmiddle" /></a></li>
+            <li><a href='/'><strong>RouteMap</strong></a></li>
             <li className='has-dropdown'>
-              <a className='active'>Beers</a>
+              <a className='active'>Layers</a>
               <div className='icon-arrow-down'></div>
               <ul className='list-unstyled dropdown cf'>
-                <li><a href='/beers'>List</a></li>
-                <li><a href='/beers/create'>Create</a></li>
+                <li><a href='/layers'>List</a></li>
+                <li><a href='/layers/create'>Create</a></li>
               </ul>
             </li>
             <li className='pull-right'>{me.username} <a href='/logout'>Logout</a></li>

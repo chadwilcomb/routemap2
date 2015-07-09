@@ -4,35 +4,34 @@ import ampersandMixin from 'ampersand-react-mixin';
 export default React.createClass({
     mixins: [ampersandMixin],
 
-    displayName: 'BeersPage',
+    displayName: 'LayersPage',
 
     render () {
-        const {beers} = this.props;
+        const {layers} = this.props;
 
         return (
           <div>
-            <h1>Beer Inventory</h1>
+            <h1>Layer Inventory</h1>
             <table className='table-with-hover'>
               <thead>
-                <tr><th></th><th>Brewery</th><th>Name</th><th>Type</th><th>Quantity</th><th></th><th></th></tr>
+                <tr><th></th><th>Title</th><th>Description</th><th>Created</th><th></th><th></th></tr>
               </thead>
               <tbody>
-              {beers.map((beer) => {
+              {layers.map((layer) => {
                 return (
-                  <tr key={beer._id}>
-                    <td><span className='fa fa-beer'></span></td>
-                    <td><a href={beer.details_url}>{beer.brewery}</a></td>
-                    <td><a href={beer.details_url}>{beer.name}</a></td>
-                    <td><a href={beer.details_url}>{beer.type}</a></td>
-                    <td><a href={beer.details_url}>{beer.quantity}</a></td>
-                    <td><a href={beer.update_url} className='fa fa-pencil color green'></a></td>
-                    <td><a href={beer.delete_url} className='fa fa-trash-o color red'></a></td>
+                  <tr key={layer._id}>
+                    <td><span className='fa fa-globe'></span></td>
+                    <td><a href={layer.details_url}>{layer.title}</a></td>
+                    <td><a href={layer.details_url}>{layer.description}</a></td>
+                    <td><a href={layer.details_url}>{layer.created.toLocaleString()}</a></td>
+                    <td><a href={layer.update_url} className='fa fa-pencil color green'></a></td>
+                    <td><a href={layer.delete_url} className='fa fa-trash-o color red'></a></td>
                   </tr>
                 )
               })}
               </tbody>
             </table>
-            <a href='beers/create' className='button button-outlined'><i className='fa fa-plus'></i> Add a beer</a>
+            <a href='layers/create' className='button button-outlined'><i className='fa fa-plus'></i> Add a layer</a>
           </div>
         )
     }

@@ -1,7 +1,7 @@
 import xhr from 'xhr'
 import app from 'ampersand-app'
 import Model from 'ampersand-model'
-import BeerCollection from './beer-collection'
+import LayerCollection from './layer-collection'
 import authMixin from '../helpers/api-auth-mixin'
 
 export default Model.extend(authMixin, {
@@ -52,7 +52,7 @@ export default Model.extend(authMixin, {
   },
 
   collections: {
-    beers: BeerCollection
+    layers: LayerCollection
   },
 
   syncToLocalStorage () {
@@ -74,7 +74,7 @@ export default Model.extend(authMixin, {
   },
 
   fetchInitialData () {
-    this.beers.fetch();
+    this.layers.fetch();
   }
 
 });

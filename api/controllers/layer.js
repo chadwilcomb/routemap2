@@ -10,6 +10,7 @@ exports.postLayer = function(req, res) {
   layer.title = req.body.title;
   layer.description = req.body.description;
   layer.features = req.body.features;
+  // layer.features = JSON.parse(req.body.features);
 
   layer.creator = req.user._id;
 
@@ -26,7 +27,7 @@ exports.postLayer = function(req, res) {
 exports.getLayers = function(req, res) {
 
   // Use the Layer model to find all layers
-  Layer.find({ userId: req.user._id }, function(err, layers) {
+  Layer.find({ creator: req.user._id }, function(err, layers) {
     if (err)
       res.send(err);
 
@@ -38,7 +39,7 @@ exports.getLayers = function(req, res) {
 exports.getLayer = function(req, res) {
 
   // Use the Layer model to find a specific layer
-  Layer.findOne({ userId: req.user._id, _id: req.params.layer_id }, function(err, layer) {
+  Layer.findOne({ creator: req.user._id, _id: req.params.layer_id }, function(err, layer) {
     if (err)
       res.send(err);
 
@@ -51,12 +52,11 @@ exports.putLayer = function(req, res) {
 
   // Use the Layer model to find a specific layer
   Layer.findOneAndUpdate(
-    { userId: req.user._id, _id: req.params.layer_id },
+    { creator: req.user._id, _id: req.params.layer_id },
     {
-      brewery: req.body.brewery,
-      name: req.body.name,
-      type: req.body.type,
-      quantity: req.body.quantity,
+      title: req.body.title,
+      description: req.body.description,
+      features: req.body.features,
     },
     { new: true },
     function(err, layer) {
@@ -71,7 +71,7 @@ exports.putLayer = function(req, res) {
 exports.deleteLayer = function(req, res) {
 
   // Use the Layer model to find a specific layer and remove it
-  Layer.remove({ userId: req.user._id, _id: req.params.layer_id }, function(err) {
+  Layer.remove({ creator: req.user._id, _id: req.params.layer_id }, function(err) {
     if (err)
       res.send(err);
 
