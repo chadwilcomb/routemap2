@@ -7,7 +7,7 @@ export default {
     apiUrl: 'http://localhost:8080'
   },
 
-  'routemap2.surge.sh': {
+  'routemap.surge.sh': {
     apiUrl: 'https://routemap.herokuapp.com'
   }
 }[window.location.hostname];

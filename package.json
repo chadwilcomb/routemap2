@@ -8,7 +8,7 @@
     "start-api": "nodemon api/server",
     "prebuild": "rm -rf public && mkdir public",
     "build": "NODE_ENV=production webpack",
-    "surge": "surge -p public -d routemap2.surge.sh",
+    "surge": "surge -p public -d routemap.surge.sh",
     "deploy-client": "npm run build && npm run surge",
     "deploy-api": "git push origin master"
   },
