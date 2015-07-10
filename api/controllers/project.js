@@ -10,9 +10,7 @@ exports.postProject = function(req, res) {
   project.title = req.body.title;
   project.description = req.body.description;
   project.state = req.body.state;
-
-  project.creator = req.user._id;
-  project.modifier = req.user._id;
+  project.creator = project.modifier = req.user._id;
 
   // Save the project and check for errors
   project.save(function(err) {
@@ -26,13 +24,6 @@ exports.postProject = function(req, res) {
 // Create endpoint /api/projects for GET
 exports.getProjects = function(req, res) {
 
-  // Use the Project model to find all projects
-  // Project.find({}, function(err, projects) {
-  //   if (err)
-  //     res.send(err);
-  //
-  //   res.json(projects);
-  // });
   Project.find()
     .populate({
       path: 'creator',
@@ -58,12 +49,6 @@ exports.getProjects = function(req, res) {
 exports.getProject = function(req, res) {
 
   // Use the Project model to find a specific project
-  // Project.findOne({ _id: req.params.project_id }, function(err, project) {
-  //   if (err)
-  //     res.send(err);
-  //
-  //   res.json(project);
-  // });
   Project.findOne({ _id: req.params.project_id })
     .populate({
       path: 'creator',

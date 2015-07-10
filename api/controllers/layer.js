@@ -10,9 +10,7 @@ exports.postLayer = function(req, res) {
   layer.title = req.body.title;
   layer.description = req.body.description;
   layer.features = req.body.features;
-  // layer.features = JSON.parse(req.body.features);
-
-  layer.creator = req.user._id;
+  layer.creator = layer.modifier = req.user._id;
 
   // Save the layer and check for errors
   layer.save(function(err) {
@@ -27,12 +25,6 @@ exports.postLayer = function(req, res) {
 exports.getLayers = function(req, res) {
 
   // Use the Layer model to find all layers
-  // Layer.find({},'_id title description created creator', function(err, layers) {
-  //   if (err)
-  //     res.send(err);
-  //
-  //   res.json(layers);
-  // });
   Layer.find()
     .select('-features')
     .populate({

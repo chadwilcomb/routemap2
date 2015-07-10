@@ -80,26 +80,3 @@ exports.putUser = function(req, res) {
     res.json(user);
   });
 };
-
-// exports.seedAdmin = function () {
-//   //if no admin account exists, seed one
-//   User.findOne({ email: 'routemap@placeiq.com' }, function (err, user) {
-//     if (err)
-//       console.log(err);
-//     if (!user) {
-//       var user = new User({
-//         email: 'admin',
-//         password: 'routemap'
-//       });
-//
-//       user.save(function(err) {
-//         if (err)
-//           console.log(err);
-//
-//         res.json(user);
-//         // res.json(cleanse(user));
-//       });
-//     }
-//
-//   })
-// }
