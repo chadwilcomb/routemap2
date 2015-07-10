@@ -6,7 +6,7 @@ export default React.createClass({
 
     getInitialState () {
         return {
-            username: '',
+            email: '',
             password: '',
             error: ''
         };
@@ -16,24 +16,26 @@ export default React.createClass({
       var _this = this;
       event.preventDefault();
 
-      _this.setState({ error: false });
+      _this.setState({ error: '' });
       const {me} = this.props;
 
       me.set(this.state);
 
       me.fetch({
         error: function (model, response, options) {
-          _this.setState({ error: 'Your username and/or password are incorrect' });
+          console.log(response);
+          _this.setState({ error: 'Your email and/or password are incorrect' });
         },
         success: function () {
+          me.authenticated = true;
           app.router.redirectTo('/layers');
         }
       });
     },
 
-    onUsernameChange (event) {
+    onEmailChange (event) {
       this.setState({
-        username: event.target.value
+        email: event.target.value
       });
     },
 
@@ -44,7 +46,7 @@ export default React.createClass({
     },
 
     render () {
-        const {username,password,error} = this.state;
+        const {email,password,error} = this.state;
 
         return (
           <div className='container'>
@@ -56,8 +58,8 @@ export default React.createClass({
                 <div className={error ? 'message message-error' : 'hidden'}>{error}</div>
 
                 <div className='form-element'>
-                  <label htmlFor='inputUsername'>Username</label>
-                  <input id='inputUsername' onChange={this.onUsernameChange} name='inputUsername' placeholder='Enter username' className='form-input' type='text' value={username} required/>
+                  <label htmlFor='inputEmail'>Email</label>
+                  <input id='inputEmail' onChange={this.onEmailChange} name='inputEmail' placeholder='Enter email' className='form-input' type='text' value={email} required/>
                 </div>
 
                 <div className='form-element'>

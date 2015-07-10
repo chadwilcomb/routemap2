@@ -26,7 +26,8 @@ export default React.createClass({
               success: function () {
                 app.router.redirectTo('/layers');
               },
-              error: function () {
+              error: function (model, response) {
+                console.log(response);
                 app.router.renderPage(<MessagePage title='Error saving layer.' />);
               },
             });
@@ -50,6 +51,7 @@ export default React.createClass({
       if (name === 'features') {
         try {
           state[name] = JSON.parse(value);
+          this.setState({ error: ''});
         }
         catch (err) {
           this.setState({

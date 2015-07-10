@@ -2,11 +2,12 @@ import Model from 'ampersand-model';
 import app from 'ampersand-app'
 import User from './user.js'
 import authMixin from '../helpers/api-auth-mixin';
+import LayerCollection from './layer-collection'
 
 export default Model.extend(authMixin, {
 
   url () {
-    let url = app.apiUrl + '/api/layers/';
+    let url = app.apiUrl + '/api/projects/';
     if (this.isNew()) {
       return url;
     } else {
@@ -21,30 +22,34 @@ export default Model.extend(authMixin, {
     _id: 'string',
     title: 'string',
     description: 'string',
-    features: 'object',
+    state: { type: 'string', required: true, default: 'staged', values: ['staged', 'live'], allowNull: false },
     creator: User,
     created: 'date',
     modifier: User,
     modified: 'date'
   },
 
+  collections: {
+    layers: LayerCollection
+  },
+
   derived: {
     details_url: {
       deps: ['id'],
       fn () {
-        return '/layers/' + this.getId();
+        return '/projects/' + this.getId();
       }
     },
     update_url: {
       deps: ['id'],
       fn () {
-        return '/layers/edit/' + this.getId();
+        return '/projects/edit/' + this.getId();
       }
     },
     delete_url: {
       deps: ['id'],
       fn () {
-        return '/layers/delete/' + this.getId();
+        return '/projects/delete/' + this.getId();
       }
     }
   },

@@ -10,25 +10,19 @@ function cleanse(user) {
 
 // Create endpoint /api/users for POST
 exports.postUser = function(req, res) {
+  console.log(req.body);
+
   var user = new User({
-    username: req.body.username,
-    password: req.body.password
+    email: req.body.email,
+    password: req.body.password,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
   });
-  User.findOne({ username: user.username }, function (err, found) {
+  user.save(function(err) {
     if (err) {
       res.send(err);
     }
-    console.log(found);
-    if (found === null) {
-      user.save(function(err) {
-        if (err) {
-          res.send(err);
-        }
-        res.json(cleanse(user));
-      });
-    } else {
-      res.status(500).send('Username already taken');
-    }
+    res.json(cleanse(user));
   });
 };
 
@@ -42,21 +36,22 @@ exports.getUsers = function(req, res) {
   });
 };
 
-// Create endpoint /api/users/:username for GET
+// Create endpoint /api/users/:email for GET
 exports.getUser = function(req, res) {
   // Use the User model to find a specific user
-  User.findOne({ username: req.params.username }, function(err, user) {
+  User.findOne({ email: req.params.email }, function(err, user) {
     if (err)
       res.send(err);
 
-    res.json(cleanse(user));
+    res.json(user);
+    // res.json(cleanse(user));
   });
 };
 
-// Create endpoint /api/users/:username for DELETE
+// Create endpoint /api/users/:email for DELETE
 exports.deleteUser = function(req, res) {
   // Use the User model to find a specific user and remove it
-  User.remove({ username: req.params.username }, function(err) {
+  User.remove({ email: req.params.email }, function(err) {
     if (err)
       res.send(err);
 
@@ -64,24 +59,47 @@ exports.deleteUser = function(req, res) {
   });
 };
 
-exports.seedAdmin = function (req, res) {
-  //if no admin account exists, seed one
-  User.findOne({ username: 'admin' }, function (err, user) {
-    if (err)
-      res.send(err);
-    if (!user) {
-      var user = new User({
-        username: 'admin',
-        password: 'routemap'
-      });
+// Create endpoint /api/users/:email for PUT
+exports.putUser = function(req, res) {
 
-      user.save(function(err) {
-        if (err)
-          res.send(err);
+  // Use the Layer model to find a specific layer
+  User.findOneAndUpdate(
+    { email: req.params.email },
+    {
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      type: req.body.type
+    },
+    { new: true },
+    function(err, user) {
+      if (err)
+        res.send(err);
 
-        res.json(cleanse(user));
-      });
-    }
+    res.json(user);
+  });
+};
 
-  })
-}
+// exports.seedAdmin = function () {
+//   //if no admin account exists, seed one
+//   User.findOne({ email: 'routemap@placeiq.com' }, function (err, user) {
+//     if (err)
+//       console.log(err);
+//     if (!user) {
+//       var user = new User({
+//         email: 'admin',
+//         password: 'routemap'
+//       });
+//
+//       user.save(function(err) {
+//         if (err)
+//           console.log(err);
+//
+//         res.json(user);
+//         // res.json(cleanse(user));
+//       });
+//     }
+//
+//   })
+// }

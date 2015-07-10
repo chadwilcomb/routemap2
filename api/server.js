@@ -14,7 +14,7 @@ var userController = require('./controllers/user');
 var port = process.env.PORT || 8080;
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/routemap';
 
-// Connect to the MongoDB  
+// Connect to the MongoDB
 mongoose.connect(mongoUri);
 
 console.log('Mongoose connected to ' + mongoUri);
@@ -60,20 +60,20 @@ router.route('/projects/:project_id')
   .delete(authController.isAuthenticated, projectController.deleteProject);
 
 
-
 // Create endpoint handlers for /users
 router.route('/users')
   .post(userController.postUser)
-  .get(authController.isAuthenticated, userController.getUsers);
+  .get(userController.getUsers);
 
-router.route('/users/:username')
+router.route('/users/:email')
   .get(authController.isAuthenticated, userController.getUser)
+  .put(authController.isAuthenticated, userController.putUser)
   .delete(authController.isAuthenticated, userController.deleteUser);
 
 // Register all our routes with /api
 app.use('/api', router);
 
-userController.seedAdmin();
+// userController.seedAdmin();
 
 // Start the server
 app.listen(port);

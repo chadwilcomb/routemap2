@@ -23,14 +23,18 @@ var ProjectSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  account: {
+  modified: {
+    type: Date,
+    default: Date.now
+  },
+  modifier: {
     type: Schema.ObjectId,
-    ref: 'Account'
-  }
-  // features: [{
-  //   type: Schema.ObjectId,
-  //   ref: 'Feature'
-  // }]
+    ref: 'User'
+  },
+  layers: [{
+    type: Schema.ObjectId,
+    ref: 'Layer'
+  }]
 });
 // Export the Mongoose model
 module.exports = mongoose.model('Project', ProjectSchema);

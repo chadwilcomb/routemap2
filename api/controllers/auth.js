@@ -4,11 +4,11 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var User = require('../models/user');
 
 passport.use(new BasicStrategy(
-  function(username, password, callback) {
-    User.findOne({ username: username }, function (err, user) {
+  function(email, password, callback) {
+    User.findOne({ email: email }, '+password', function (err, user) {
       if (err) { return callback(err); }
 
-      // No user found with that username
+      // No user found with that email
       if (!user) { return callback(null, false); }
 
       // Make sure the password is correct
@@ -18,6 +18,7 @@ passport.use(new BasicStrategy(
         // Password did not match
         if (!isMatch) { return callback(null, false); }
 
+        user.lastLogin = Date.now();
         // Success
         return callback(null, user);
       });

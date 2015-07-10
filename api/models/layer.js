@@ -1,7 +1,8 @@
 // Load required packages
-var mongoose = require('mongoose')
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 var GeoJSON = require('mongoose-geojson-schema');
+
+var Schema = mongoose.Schema;
 
 var LayerSchema = new Schema({
   title: {
@@ -16,6 +17,14 @@ var LayerSchema = new Schema({
     default: Date.now
   },
   creator: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  modified: {
+    type: Date,
+    default: Date.now
+  },
+  modifier: {
     type: Schema.ObjectId,
     ref: 'User'
   }

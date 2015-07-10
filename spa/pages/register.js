@@ -10,8 +10,10 @@ export default React.createClass({
 
     getInitialState () {
         return {
-            username: '',
+            email: '',
             password: '',
+            firstName: '',
+            lastName: '',
             confirm: '',
             error: ''
         };
@@ -30,12 +32,14 @@ export default React.createClass({
       user.set({ isRegister: true });
       user.save(
         {
-          username: this.state.username,
+          email: this.state.email,
           password: this.state.password,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName
         },
         {
           success: function () {
-            user.set({ isRegister: false });
+            // user.set({ isRegister: false });
             app.router.redirectTo('/layers');
           },
           error: function (model, response, options) {
@@ -52,23 +56,31 @@ export default React.createClass({
     },
 
     render () {
-      const {username,password,confirm,error} = this.state;
+      const {email,password,firstName,lastName,confirm,error} = this.state;
 
         return (
-          <div>
+          <div className='container'>
             <h1>Register account for RouteMap</h1>
             <form name='registerForm' onSubmit={this.onSubmitForm}>
               <fieldset>
               <legend>Your info</legend>
                 <div className={error ? 'message message-error' : 'hidden'}>{error}</div>
                 <div className='form-element'>
-                  <label htmlFor='inputUsername'>Username</label>
-                  <input id='username' onChange={this.onPropChange} name='username' placeholder='Enter username' className='form-input' type='text' value={username} required/>
+                  <label htmlFor='inputFirstName'>First Name</label>
+                  <input id='inputFirstName' onChange={this.onPropChange} name='firstName' placeholder='Enter first name' className='form-input' type='text' value={firstName} required/>
+                </div>
+                <div className='form-element'>
+                  <label htmlFor='inputLastName'>Last Name</label>
+                  <input id='inputLastName' onChange={this.onPropChange} name='lastName' placeholder='Enter last name' className='form-input' type='text' value={lastName} required/>
+                </div>
+                <div className='form-element'>
+                  <label htmlFor='inputEmail'>Email</label>
+                  <input id='inputEmail' onChange={this.onPropChange} name='email' placeholder='Enter email' className='form-input' type='email' value={email} required/>
                 </div>
 
                 <div className='form-element'>
                   <label htmlFor='inputPassword'>Password</label>
-                  <input id='password' onChange={this.onPropChange} name='password' placeholder='Enter password' className='form-input' type='password' value={password} required/>
+                  <input id='inputPassword' onChange={this.onPropChange} name='password' placeholder='Enter password' className='form-input' type='password' value={password} required/>
                 </div>
 
                 <div className='form-element'>

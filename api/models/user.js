@@ -1,23 +1,45 @@
 // Load required packages
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 var bcrypt = require('bcrypt-nodejs');
 
 // Define our user schema
 var UserSchema = new mongoose.Schema({
-  username: {
+  email: {
     type: String,
+    lowercase: true,
     unique: true,
-    required: true
+    required: '{PATH} is required!'
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    select: false
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  type: {
+    type: String,
+    enum: ['user', 'admin'],
+    lowercase: true,
+    default: 'user'
   },
   joined: {
     type: Date,
     default: Date.now
+  },
+  lastLogin: {
+    type: Date,
+    default: Date.now
   }
 });
+
+// Add unique validation message
+UserSchema.plugin(uniqueValidator, { message: '{VALUE} is not available.' });
 
 // Execute before each user.save() call
 UserSchema.pre('save', function(callback) {
@@ -37,6 +59,7 @@ UserSchema.pre('save', function(callback) {
     });
   });
 });
+
 
 
 UserSchema.methods.verifyPassword = function(password, cb) {

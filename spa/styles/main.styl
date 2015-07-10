@@ -1,5 +1,8 @@
 @import 'yeticss'
 
+.leaflet-map-pane img
+  border-radius: 0;
+
 .color.red
   color: $red
 
@@ -8,6 +11,10 @@
 
 .color.orange
   color: $orange
+
+@media screen and (min-width: 901px)
+  .container
+    width: 85%
 
 .hidden
   display: none
@@ -29,3 +36,7 @@ header
   > span
     margin-left: 10px
     margin-right: 10px
+
+.details-page .grid-flex-cell
+  margin-bottom: 0;
+  padding: 5px 0;

@@ -27,24 +27,50 @@ exports.postLayer = function(req, res) {
 exports.getLayers = function(req, res) {
 
   // Use the Layer model to find all layers
-  Layer.find({ creator: req.user._id },'_id title description created creator', function(err, layers) {
-    if (err)
-      res.send(err);
+  // Layer.find({},'_id title description created creator', function(err, layers) {
+  //   if (err)
+  //     res.send(err);
+  //
+  //   res.json(layers);
+  // });
+  Layer.find()
+    .select('-features')
+    .populate({
+      path: 'creator',
+      select: 'email firstName lastName'
+    })
+    .populate({
+      path: 'modifier',
+      select: 'email firstName lastName'
+    })
+    .exec(function (err, layers) {
+      if (err)
+        res.send(err);
 
-    res.json(layers);
-  });
+      res.json(layers);
+    });
+
 };
 
 // Create endpoint /api/layers/:layer_id for GET
 exports.getLayer = function(req, res) {
 
   // Use the Layer model to find a specific layer
-  Layer.findOne({ creator: req.user._id, _id: req.params.layer_id }, function(err, layer) {
-    if (err)
-      res.send(err);
+  Layer.findOne({ _id: req.params.layer_id })
+    .populate({
+      path: 'creator',
+      select: 'email firstName lastName'
+    })
+    .populate({
+      path: 'modifier',
+      select: 'email firstName lastName'
+    })
+    .exec(function (err, layer) {
+      if (err)
+        res.send(err);
 
-    res.json(layer);
-  });
+      res.json(layer);
+    });
 };
 
 // Create endpoint /api/layers/:layer_id for PUT
@@ -52,11 +78,13 @@ exports.putLayer = function(req, res) {
 
   // Use the Layer model to find a specific layer
   Layer.findOneAndUpdate(
-    { creator: req.user._id, _id: req.params.layer_id },
+    { _id: req.params.layer_id },
     {
       title: req.body.title,
       description: req.body.description,
       features: req.body.features,
+      modifier: req.user._id,
+      modified: Date.now()
     },
     { new: true },
     function(err, layer) {
@@ -71,7 +99,7 @@ exports.putLayer = function(req, res) {
 exports.deleteLayer = function(req, res) {
 
   // Use the Layer model to find a specific layer and remove it
-  Layer.remove({ creator: req.user._id, _id: req.params.layer_id }, function(err) {
+  Layer.remove({ _id: req.params.layer_id }, function(err) {
     if (err)
       res.send(err);
 
