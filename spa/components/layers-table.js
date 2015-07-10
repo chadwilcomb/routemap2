@@ -11,7 +11,7 @@ export default React.createClass({
         return (
             <table className='table-with-hover'>
               <thead>
-                <tr><th></th><th>Title</th><th>Description</th><th>Created By</th><th>Created On</th><th>Modified By</th><th>Modified On</th><th></th><th></th><th></th></tr>
+                <tr><th></th><th>Title</th><th>Description</th><th>Updated</th><th></th><th></th></tr>
               </thead>
               <tbody>
               {layers.map((layer) => {
@@ -20,9 +20,6 @@ export default React.createClass({
                     <td><a href={layer.details_url} className='fa fa-globe' title='Details'></a></td>
                     <td><a href={layer.details_url} title='Details'>{layer.title}</a></td>
                     <td>{layer.description}</td>
-                    <td>{layer.creator.email}</td>
-                    <td>{layer.created.toLocaleString()}</td>
-                    <td>{layer.modifier.email}</td>
                     <td>{layer.modified.toLocaleString()}</td>
                     <td><a href={layer.update_url} className='fa fa-pencil color green' title='Edit'></a></td>
                     <td><a href={layer.delete_url} className='fa fa-trash-o color red' title='Delete'></a></td>
