@@ -39,7 +39,7 @@ export default React.createClass({
             Modified By: <strong>{project.modifier.email}</strong>
           </div>
         </div>
-        <div className='grid-flex-container'>
+        <div className='grid-flex-container well'>
           <div className='grid-flex-cell'>
             <h3 style={{ marginBottom: '0' }}>Project Layers:</h3>
             <LayersTable layers={project.layers} />

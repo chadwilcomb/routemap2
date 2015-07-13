@@ -6,7 +6,7 @@ import Router from './router';
 import Me from './models/me';
 import config from './config';
 
-require("file?name=favicon.ico!./images/favicon/favicon.ico");
+require("file?name=favicon.ico!./images/favicon.ico");
 
 //expose 'app' to browser console for debugging
 window.app = app;
