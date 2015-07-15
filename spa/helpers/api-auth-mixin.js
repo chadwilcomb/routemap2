@@ -4,7 +4,9 @@ export default {
   ajaxConfig () {
     return {
       headers: app.me.authHeader,
-      timeout: 20000
+      xhrFields: {
+        timeout: 20000
+      }
     }
   }
 }

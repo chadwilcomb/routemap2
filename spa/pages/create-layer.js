@@ -33,22 +33,12 @@ export default React.createClass({
             });
           }
         });
-
-        // layer.save(this.state, {
-        //   success: function () {
-        //     app.router.redirectTo('/layers');
-        //   },
-        //   error: function () {
-        //     app.router.renderPage(<MessagePage title='Error saving layer.' />);
-        //   },
-        // });
     },
 
     onPropChange (event) {
       const {name, value, type} = event.target;
       let state = {};
-      // state[name] = type === 'number' ? parseInt(value, 10) : value;
-      if (name === 'features') {
+      if (value && name === 'features') {
         try {
           state[name] = JSON.parse(value);
           this.setState({ error: ''});
@@ -63,16 +53,6 @@ export default React.createClass({
       }
       this.setState(state);
     },
-
-    // validateGeoJson (features) {
-      // const errors = geojsonhint(features);
-      // if (errors) {
-      //   const errMsg = errors.map((error) => { return error.mesage + ' '; });
-      //   this.setState({
-      //     error: errMsg
-      //   });
-      // }
-    // },
 
     getInitialState () {
       return {
