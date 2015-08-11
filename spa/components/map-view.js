@@ -14,7 +14,7 @@ export default React.createClass({
 
       L.mapbox.accessToken = 'pk.eyJ1IjoibmV3ZmllbGRzIiwiYSI6Ikk3TmFfYWMifQ.yxfeME9vJaT2GyCbnzsBzw';
 
-      const map = this.map = L.mapbox.map(this.getDOMNode(), 'examples.map-i86nkdio');
+      const map = this.map = L.mapbox.map(this.getDOMNode(), 'placeiq.map-8v9ayqgr');
       const layer = L.mapbox.featureLayer(features).addTo(map);
       map.fitBounds(layer.getBounds());
       // map.on('click', this.onMapClick);

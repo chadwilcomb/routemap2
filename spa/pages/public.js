@@ -59,7 +59,7 @@ export default React.createClass({
 
                 <div className='form-element'>
                   <label htmlFor='inputEmail'>Email</label>
-                  <input id='inputEmail' onChange={this.onEmailChange} name='inputEmail' placeholder='Enter email' className='form-input' type='text' value={email} required/>
+                  <input id='inputEmail' onChange={this.onEmailChange} name='inputEmail' placeholder='Enter email' className='form-input' type='email' value={email} required/>
                 </div>
 
                 <div className='form-element'>

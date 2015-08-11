@@ -22,18 +22,17 @@ export default React.createClass({
         </div>
         <div className='grid-flex-container'>
           <div className='grid-flex-cell'>
-            Created On: <strong>{layer.created.toLocaleString()}</strong>
-          </div>
-          <div className='grid-flex-cell'>
-            Created By: <strong>{layer.creator.email}</strong>
+            URL: <strong>{layer.url()}</strong>
           </div>
         </div>
         <div className='grid-flex-container'>
           <div className='grid-flex-cell'>
-            Modified On: <strong>{layer.modified.toLocaleString()}</strong>
+            Created by <strong>{layer.creator.email}</strong> on <strong>{layer.created.toLocaleString()}</strong>
           </div>
+        </div>
+        <div className='grid-flex-container'>
           <div className='grid-flex-cell'>
-            Modified By: <strong>{layer.modifier.email}</strong>
+            Last modified by <strong>{layer.modifier.email}</strong> on <strong>{layer.modified.toLocaleString()}</strong>
           </div>
         </div>
         <MapView features={layer.features}/>

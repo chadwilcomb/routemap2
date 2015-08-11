@@ -22,10 +22,28 @@ export default React.createClass({
         });
     },
 
+    // onPropChange (event) {
+    //   const {name, value, type} = event.target;
+    //   let state = {};
+    //   state[name] = type === 'number' ? parseInt(value, 10) : value;
+    //   this.setState(state);
+    // },
     onPropChange (event) {
       const {name, value, type} = event.target;
       let state = {};
-      state[name] = type === 'number' ? parseInt(value, 10) : value;
+      if (value && name === 'features') {
+        try {
+          state[name] = JSON.parse(value);
+          this.setState({ error: ''});
+        }
+        catch (err) {
+          this.setState({
+            error: 'Invalid GeoJSON: ' + err.message
+          });
+        }
+      } else {
+        state[name] = value;
+      }
       this.setState(state);
     },
 
